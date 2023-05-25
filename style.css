@@ -1,0 +1,56 @@
+@media screen and (min-width: 480px) {
+  #leftsidebar {
+    width: 200px;
+    float: left;
+  }
+  #main {
+    margin-left: 216px;
+  }
+}
+
+body {
+  background-image: url("traintracks.jpg");
+  background-attachment: fixed;
+  font-family: "Audiowide", sans-serif;
+}
+
+header {
+  color: rgb(39, 85, 53);
+  text-shadow: 2px 2px lightgray;
+  letter-spacing: 40px;
+  font-style: oblique;
+}
+
+h3 {
+  color: rgb(39, 85, 53);
+  margin-left: 20px;
+  text-shadow: 2px 2px lightgrey;
+  letter-spacing: 5px;
+}
+
+.flex-container {
+  display: flex;
+  height: 600px;
+  flex-wrap: wrap;
+  align-content: space-around;
+}
+
+/* unvisited link */
+a:link {
+  color: rgb(0, 0, 0);
+}
+
+/* visited link */
+a:visited {
+  color: green;
+}
+
+/* mouse over link */
+a:hover {
+  color: white;
+}
+
+/* selected link */
+a:active {
+  color: black;
+}
