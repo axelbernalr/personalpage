@@ -9,8 +9,7 @@
 }
 
 body {
-  background-image: url("traintracks.jpg");
-  background-attachment: fixed;
+  background-color="white"
   font-family: "Audiowide", sans-serif;
 }
 
