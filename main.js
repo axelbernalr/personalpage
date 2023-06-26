@@ -1,4 +1,4 @@
-  function toggleMode() {
+    function toggleMode() {
       const body = document.body;
       const currentMode = body.getAttribute("data-mode");
 
