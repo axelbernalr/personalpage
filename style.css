@@ -96,3 +96,12 @@ a:active {
   }
 }
 
+ body[data-mode="light"] {
+      background-color: white;
+      color: black;
+    }
+
+    body[data-mode="dark"] {
+      background-color: black;
+      color: white;
+    }
