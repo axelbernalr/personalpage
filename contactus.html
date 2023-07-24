@@ -3,6 +3,46 @@
 <head>
   <title>Contact Form</title>
   <link rel="stylesheet" href="./contactusstyle.css">
+
+<style>
+  function validateForm() {
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
+  const errorMessage = document.getElementById('error-message');
+
+  errorMessage.innerHTML = '';
+
+  if (!name) {
+    errorMessage.innerHTML += '<p>Please enter your name.</p>';
+    return false;
+  }
+
+  if (!email) {
+    errorMessage.innerHTML += '<p>Please enter your email address.</p>';
+    return false;
+  } else if (!validateEmail(email)) {
+    errorMessage.innerHTML += '<p>Please enter a valid email address.</p>';
+    return false;
+  }
+
+  if (!message) {
+    errorMessage.innerHTML += '<p>Please enter your message.</p>';
+    return false;
+  }
+
+  return true;
+}
+
+function validateEmail(email) {
+  // Basic email validation (you can use a more robust regex for production)
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+</style>
+
+
+  
 </head>
 <body>
   <div class="navbar">
