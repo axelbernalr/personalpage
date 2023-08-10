@@ -5,40 +5,10 @@
   <link rel="stylesheet" href="./contactusstyle.css">
 
 <style>
-  function validateForm() {
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const message = document.getElementById('message').value.trim();
-  const errorMessage = document.getElementById('error-message');
+    .error {
+      color: red;
+    }
 
-  errorMessage.innerHTML = '';
-
-  if (!name) {
-    errorMessage.innerHTML += '<p>Please enter your name.</p>';
-    return false;
-  }
-
-  if (!email) {
-    errorMessage.innerHTML += '<p>Please enter your email address.</p>';
-    return false;
-  } else if (!validateEmail(email)) {
-    errorMessage.innerHTML += '<p>Please enter a valid email address.</p>';
-    return false;
-  }
-
-  if (!message) {
-    errorMessage.innerHTML += '<p>Please enter your message.</p>';
-    return false;
-  }
-
-  return true;
-}
-
-function validateEmail(email) {
-  // Basic email validation (you can use a more robust regex for production)
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(email);
-}
 </style>
 
 
@@ -54,26 +24,101 @@ function validateEmail(email) {
   <img src="./emailng.jpg" width="250" height="auto">
   <p>Please leave your contact information below, and we will get back to you as soon as possible! In the meantime, please continue to look around.</p>
 
- <div class="container">
-    <h2>Contact Us</h2>
-    <form id="contactForm" onsubmit="return validateForm()">
-      <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-      </div>
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-      <div class="form-group">
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit">Submit</button>
-      </div>
-    </form>
-    <div id="error-message"></div>
-  </div>
-</body>
+<div id="contact-form"></div>
+
+<script>
+const formData = {
+  "formTitle": "Contact Us",
+  "fields": [
+    {
+      "label": "Name",
+      "type": "text",
+      "name": "name",
+      "required": true
+    },
+    {
+      "label": "Email",
+      "type": "email",
+      "name": "email",
+      "required": true
+    },
+    {
+      "label": "Subject",
+      "type": "text",
+      "name": "subject",
+      "required": true
+    },
+    {
+      "label": "Message",
+      "type": "textarea",
+      "name": "message",
+      "required": true
+    }
+  ],
+  "submitButton": {
+    "label": "Submit",
+    "type": "button"
+  }
+};
+
+const formContainer = document.getElementById("contact-form");
+
+function createForm() {
+  const form = document.createElement("form");
+  form.setAttribute("id", "contactForm");
+  
+  const title = document.createElement("h2");
+  title.textContent = formData.formTitle;
+  form.appendChild(title);
+
+  formData.fields.forEach(field => {
+    const input = document.createElement(field.type === "textarea" ? "textarea" : "input");
+    input.setAttribute("type", field.type);
+    input.setAttribute("name", field.name);
+    input.setAttribute("placeholder", field.label);
+    if (field.required) {
+      input.setAttribute("required", "true");
+    }
+    form.appendChild(input);
+  });
+
+  const errorDiv = document.createElement("div");
+  errorDiv.setAttribute("id", "errorMessages");
+  form.appendChild(errorDiv);
+
+  const submitButton = document.createElement("button");
+  submitButton.setAttribute("type", formData.submitButton.type);
+  submitButton.textContent = formData.submitButton.label;
+  form.appendChild(submitButton);
+  
+  formContainer.appendChild(form);
+}
+
+createForm();
+
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+  const errorDiv = document.getElementById("errorMessages");
+  errorDiv.innerHTML = '';
+
+  let isValid = true;
+
+  formData.fields.forEach(field => {
+    const input = document.getElementsByName(field.name)[0];
+    if (!input.value && field.required) {
+      const errorMessage = document.createElement("p");
+      errorMessage.className = "error";
+      errorMessage.textContent = `${field.label} is required.`;
+      errorDiv.appendChild(errorMessage);
+      isValid = false;
+    }
+  });
+
+  if (isValid) {
+    // Perform form submission logic here
+    console.log("Form submitted!");
+    // You can also submit the form using AJAX if desired
+  }
+});
+</script>
 </html>
