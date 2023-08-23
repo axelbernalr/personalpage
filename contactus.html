@@ -4,12 +4,20 @@
   <title>Contact Form</title>
   <link rel="stylesheet" href="./contactusstyle.css">
 
-<style>
-    .error {
-      color: red;
-    }
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 
-</style>
+const Header = () => {
+  return (
+    <>
+      <h1 style={{color: "red"}}>Hello Style!</h1>
+      <p>Add a little style!</p>
+    </>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Header />);
 
 
   
